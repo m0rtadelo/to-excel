@@ -1,14 +1,18 @@
 {
   "name": "to-excel",
-  "version": "1.0.1",
-  "description": "Util to export data as compatible excel file (xml format).",
+  "version": "2.0.0",
+  "description": "Util to generate compatible Excel xls file (xml in fact). Works with node and browser. CommonJS and ES6 module compatible.",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
     "export",
-    "excel"
+    "excel",
+    "ES6",
+    "CommonJS",
+    "xls",
+    "xml"
   ],
   "author": "m0rtadelo",
   "license": "MIT"
