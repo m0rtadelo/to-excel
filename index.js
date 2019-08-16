@@ -9,7 +9,7 @@
 /**
  * exports the data to a XLS file (as XML)
  */
-function exportXLS(columns, data, filename) {
+module.exports.exportXLS = function exportXLS(columns, data, filename) {
     const xml = generateXML(columns, data, filename);
     download(filename + ".xls", xml);
 }
@@ -61,5 +61,3 @@ function generateXML (columns, data, filename) {
     }
     return xml;
 }
-
-module.exports.exportXLS = exportXLS;
