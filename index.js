@@ -71,7 +71,7 @@ var ToExcel = /** @class */ (function () {
             xml =
               xml +
               '<Cell><Data ss:Type="String">' +
-              this.parseXML(data[i][columns[l].field]) +
+              this.parseXML(this.getData(data[i], [columns[l].field])) +
               "</Data></Cell>";
           }
           xml = xml + "\n</Row>";
@@ -79,6 +79,12 @@ var ToExcel = /** @class */ (function () {
         xml = xml + "\n</Table></Worksheet>\n</Workbook>";
       }
       return xml;
+    }
+
+    ToExcel.getData = function (row, item) {
+      let obj = row;
+      item.toString().split('.').forEach(key => obj = obj[key]);
+      return obj;
     }
     return ToExcel;
 }());
