@@ -1,6 +1,7 @@
 [![Build Status](https://travis-ci.org/m0rtadelo/to-excel.svg?branch=master)](https://travis-ci.org/m0rtadelo/to-excel)
 [![Coverage Status](https://coveralls.io/repos/github/m0rtadelo/to-excel/badge.svg?branch=master)](https://coveralls.io/github/m0rtadelo/to-excel?branch=master)
 [![Known Vulnerabilities](https://snyk.io//test/github/m0rtadelo/to-excel/badge.svg?targetFile=package.json)](https://snyk.io//test/github/m0rtadelo/to-excel?targetFile=package.json)
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/2ef49526659748808e26722c7f31ca62)](https://www.codacy.com/app/m0rtadelo/to-excel?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=m0rtadelo/to-excel&amp;utm_campaign=Badge_Grade)
 ![GitHub top language](https://img.shields.io/github/languages/top/m0rtadelo/to-excel.svg)
 [![npm version](https://badge.fury.io/js/to-excel.svg)](https://badge.fury.io/js/to-excel)
 
