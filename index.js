@@ -36,7 +36,7 @@ var ToExcel = /** @class */ (function () {
     }
     ToExcel.parseXML = function (input) {
       var output;
-      if (!input) return;
+      if (!input) return "";
       output = input.toString().replace(/</g, "&lt;");
       output = output.replace(new RegExp(">", "g"), "&gt;");
       output = output.replace(new RegExp('"', "g"), "&quot;");
@@ -83,7 +83,11 @@ var ToExcel = /** @class */ (function () {
 
     ToExcel.getData = function (row, item) {
       let obj = row;
-      item.toString().split('.').forEach(key => obj = obj[key]);
+      try {
+        item.toString().split('.').forEach(key => obj = obj[key]);        
+      } catch (error) {
+        obj = undefined;
+      }
       return obj;
     }
     return ToExcel;

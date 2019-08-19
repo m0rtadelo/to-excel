@@ -2,16 +2,17 @@ const toExcel = require('../index').ToExcel;
 const result1 = require('./result1');
 // set data
 const data = [
-    { id: 1, value: 'It<br>em 1', status: { item: '가지마' } },
-    { value: 'Item 2', id: 2, status: { item: 'Disabled' } },
-    { id: 3, value: 'It"em 3', status: { item: 'Dis\'abled' }, extra: 'ignored field' }
+    { id: 1, value: 'Item 1 <br>', status: { item: '가지마' } },
+    { value: 'Item 2', status: { item: 'благодарю вас' } },
+    { value: 'Item 3 \'quotes\'', id: 3, status: { item: 'Enabled' } },
+    { id: 4, value: 'Item 4 "quotes"', extra: 'ignored field' }
 ];
 
 // set headers
 const headers = [
-    { label: 'Identifi\\cator', field: 'id' },
-    { label: 'Description<<br>', field: 'value' },
-    { label: 'Sta<br>tus', field: 'status.item' }
+    { label: 'Identificator', field: 'id' },
+    { label: 'Description', field: 'value' },
+    { label: 'Status', field: 'status.item' }
 ]
 
 // generate excel file
