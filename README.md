@@ -42,3 +42,5 @@ const content = toExcel.exportXLS( headers, data, 'filename' );
 // in node you must open or save the content
 require('fs').writeFileSync('filename.xls', content);
 ```
+
+Demo: https://m0rtadelo.github.io/to-excel/

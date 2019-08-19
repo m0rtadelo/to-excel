@@ -6,7 +6,8 @@
   "scripts": {
     "test": "nyc mocha",
     "coverage": "nyc --reporter=lcov --reporter=text-lcov npm test",
-    "coveralls": "nyc npm test && nyc report --reporter=text-lcov | coveralls"
+    "coveralls": "nyc npm test && nyc report --reporter=text-lcov | coveralls",
+    "build": "cd travis && node ./build.js"
   },
   "keywords": [
     "export",
