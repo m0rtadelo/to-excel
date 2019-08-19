@@ -31,7 +31,7 @@ var ToExcel = /** @class */ (function () {
             document.body.removeChild(elem);
           }          
       } catch (error) {
-          console.error('no window?');
+          
       }
     }
     ToExcel.parseXML = function (input) {

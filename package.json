@@ -4,7 +4,8 @@
   "description": "Util to generate compatible Excel xls file (xml in fact). Works with node and browser. CommonJS and ES6 module compatible.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "nyc mocha",
+    "coverage": "nyc --reporter=lcov --reporter=text-lcov npm test"
   },
   "keywords": [
     "export",
@@ -23,5 +24,9 @@
     "type": "git",
     "url": "https://github.com/m0rtadelo/to-excel.git"
   },
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "mocha": "^5.2.0",
+    "nyc": "^14.1.1"
+  }
 }

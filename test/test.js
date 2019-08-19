@@ -1,5 +1,14 @@
+var assert = require('assert');
 const toExcel = require('../index').ToExcel;
-const result1 = require('./result1');
+const expect1 = `<Row><Cell><Data ss:Type="String">1</Data></Cell><Cell><Data ss:Type="String">Item 1 &lt;br&gt;</Data></Cell><Cell><Data ss:Type="String">가지마</Data></Cell>
+</Row>
+<Row><Cell><Data ss:Type="String"></Data></Cell><Cell><Data ss:Type="String">Item 2</Data></Cell><Cell><Data ss:Type="String">благодарю вас</Data></Cell>
+</Row>
+<Row><Cell><Data ss:Type="String">3</Data></Cell><Cell><Data ss:Type="String">Item 3 'quotes'</Data></Cell><Cell><Data ss:Type="String">Enabled</Data></Cell>
+</Row>
+<Row><Cell><Data ss:Type="String">4</Data></Cell><Cell><Data ss:Type="String">Item 4 &quot;quotes&quot;</Data></Cell><Cell><Data ss:Type="String"></Data></Cell>
+</Row>`;
+
 // set data
 const data = [
     { id: 1, value: 'Item 1 <br>', status: { item: '가지마' } },
@@ -15,11 +24,24 @@ const headers = [
     { label: 'Status', field: 'status.item' }
 ]
 
-// generate excel file
-const content = toExcel.exportXLS( headers, data, 'test' );        
-if (content == result1) {
-    console.log('OK');
-} else {
-    console.log('KO');
-}
-require('fs').writeFileSync('filename.xls', content);
+describe('load', function () {
+    it('should load on require', function () {
+        assert.notEqual(toExcel, undefined, 'module not loaded')
+    });
+});
+
+describe('usage', function () { 
+    it('should return "" if data or headers are void', function() {
+        const content = toExcel.exportXLS(undefined, undefined, 'test');
+        const content1 = toExcel.exportXLS(headers, undefined, 'test');
+        const content2 = toExcel.exportXLS(undefined, data, 'test');
+        assert.equal(content, "", 'incorrect response')
+        assert.equal(content1, "", 'incorrect response')
+        assert.equal(content2, "", 'incorrect response')
+    });
+    it('should export data as expected', function() {    
+        // generate excel file
+        const content = toExcel.exportXLS( headers, data, 'test' );        
+        assert.equal(content.includes(expect1), true, 'incorrect export')
+    }) 
+});
