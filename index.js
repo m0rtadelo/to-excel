@@ -90,7 +90,7 @@ var ToExcel = /** @class */ (function () {
     ToExcel.getData = function (row, item) {
       let obj = row;
       try {
-        item.toString().split('.').forEach(key => obj = obj[key]);        
+        item.toString().split('.').forEach(function(key) { obj = obj[key] });        
       } catch (error) {
         obj = undefined;
       }
