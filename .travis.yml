@@ -9,6 +9,11 @@ node_js:
 
 script: "npm run coveralls"
 
+after_success:
+  - sudo apt-get install git
+  - chmod +x travis/push.sh
+  - travis/push.sh
+
 branches:
   only:
   - master
