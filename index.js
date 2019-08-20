@@ -12,9 +12,15 @@ var ToExcel = /** @class */ (function () {
     /**
      * exports the data to a XLS file (as XML)
      */
-    ToExcel.exportXLS = function (columns, data, filename) {
+    ToExcel.exportXLS = function (columns, data, filename, options) {
+        if(!options) {
+          options = {}
+        }
+        if(!options.extension) {
+          options.extension = "xls";
+        }
         const xml = this.generateXML(columns, data, filename);
-        this.download(filename + ".xls", xml);
+        this.download(filename + "." + options.extension, xml);
         return xml;
     };
     ToExcel.download = function (filename, data) {

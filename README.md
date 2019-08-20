@@ -9,7 +9,7 @@
 
 Util to generate compatible Excel xls file (xml in fact). Works with node and browser. CommonJS and ES6 module compatible. No dependencies.
 
-Works with your favorite frameworks and libraries (Angular, React, Electron, Webpack...)
+Works with your favorite frameworks and libraries (Angular, React, Electron, Webpack...) and in the browser using the script tag.
 
 ## Install
 
@@ -19,8 +19,9 @@ Works with your favorite frameworks and libraries (Angular, React, Electron, Web
 
 ```javascript
 // include library (only one of the above methods)
-const toExcel = require('to-excel').ToExcel;    // CommonJS 
-import { ToExcel } from 'to-excel';             // ES6 
+<script src="https://m0rtadelo.github.io/to-excel/to-excel.js"></script>    // HTML
+const toExcel = require('to-excel').ToExcel;                                // CommonJS 
+import { ToExcel } from 'to-excel';                                         // ES6 
 
 // set data
 const data = [
