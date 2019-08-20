@@ -16,9 +16,15 @@ toExcel.download = function (filename, data) {
           
       }
     }
-toExcel.exportXLS = function (columns, data, filename) {
+toExcel.exportXLS = function (columns, data, filename, options) {
+        if(!options) {
+          options = {}
+        }
+        if(!options.extension) {
+          options.extension = "xls";
+        }
         const xml = this.generateXML(columns, data, filename);
-        this.download(filename + ".xls", xml);
+        this.download(filename + "." + options.extension, xml);
         return xml;
     }
 toExcel.generateXML = function (columns, data, filename) {
