@@ -9,7 +9,9 @@
 
 Util to generate compatible Excel xls file (xml in fact). Works with node and browser. CommonJS and ES6 module compatible. No dependencies.
 
-Works with your favorite frameworks and libraries (Angular, React, Electron, Webpack...) and in the browser using the script tag.
+Works with your favorite frameworks and libraries (Angular, React, Electron, Webpack...) and in the browser using the script tag. 
+
+Compatible with all browsers (IE9+ included).
 
 ## Install
 
@@ -19,12 +21,12 @@ Works with your favorite frameworks and libraries (Angular, React, Electron, Web
 
 ```javascript
 // include library (only one of the above methods)
-<script src="https://m0rtadelo.github.io/to-excel/to-excel.js"></script>    // HTML
-const toExcel = require('to-excel').toExcel;                                // CommonJS 
-import { toExcel } from 'to-excel';                                         // ES6 
+<script src="https://m0rtadelo.github.io/to-excel/to-excel.js"></script> // HTML
+var toExcel = require('to-excel').toExcel;                               // CommonJS 
+import { toExcel } from 'to-excel';                                      // ES6 
 
 // set data
-const data = [
+var data = [
     { id: 1, value: 'Item 1 <br>', status: { item: '가지마' } },
     { value: 'Item 2', status: { item: 'благодарю вас' } },
     { value: 'Item 3 \'quotes\'', id: 3, status: { item: 'Enabled' } },
@@ -32,14 +34,14 @@ const data = [
 ];
 
 // set headers
-const headers = [
+var headers = [
     { label: 'Identificator', field: 'id' },
     { label: 'Description', field: 'value' },
     { label: 'Status', field: 'status.item' }
 ]
 
 // generate excel file (will download 'filename.xls' from browser)
-const content = toExcel.exportXLS( headers, data, 'filename' );
+var content = toExcel.exportXLS( headers, data, 'filename' );
 // in node you must open or save the content
 require('fs').writeFileSync('filename.xls', content);
 ```

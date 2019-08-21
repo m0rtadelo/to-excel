@@ -19,7 +19,7 @@ var toExcel = /** @class */ (function () {
         if(!options.extension) {
           options.extension = "xls";
         }
-        const xml = this.generateXML(columns, data, filename);
+        var xml = this.generateXML(columns, data, filename);
         this.download(filename + "." + options.extension, xml);
         return xml;
     };
@@ -88,7 +88,7 @@ var toExcel = /** @class */ (function () {
     }
 
     toExcel.getData = function (row, item) {
-      let obj = row;
+      var obj = row;
       try {
         item.toString().split('.').forEach(function(key) { obj = obj[key] });        
       } catch (error) {
