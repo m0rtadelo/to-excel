@@ -20,8 +20,8 @@ Works with your favorite frameworks and libraries (Angular, React, Electron, Web
 ```javascript
 // include library (only one of the above methods)
 <script src="https://m0rtadelo.github.io/to-excel/to-excel.js"></script>    // HTML
-const toExcel = require('to-excel').ToExcel;                                // CommonJS 
-import { ToExcel } from 'to-excel';                                         // ES6 
+const toExcel = require('to-excel').toExcel;                                // CommonJS 
+import { toExcel } from 'to-excel';                                         // ES6 
 
 // set data
 const data = [

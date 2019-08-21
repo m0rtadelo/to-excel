@@ -1,4 +1,4 @@
-const te = require('../index').ToExcel;
+const te = require('../index').toExcel;
 const fs = require('fs');
 
 var data = "function toExcel() {}";

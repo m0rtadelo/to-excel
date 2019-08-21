@@ -6,13 +6,13 @@
  */
 "use strict";
 exports.__esModule = true;
-var ToExcel = /** @class */ (function () {
-    function ToExcel() {
+var toExcel = /** @class */ (function () {
+    function toExcel() {
     }
     /**
      * exports the data to a XLS file (as XML)
      */
-    ToExcel.exportXLS = function (columns, data, filename, options) {
+    toExcel.exportXLS = function (columns, data, filename, options) {
         if(!options) {
           options = {}
         }
@@ -23,7 +23,7 @@ var ToExcel = /** @class */ (function () {
         this.download(filename + "." + options.extension, xml);
         return xml;
     };
-    ToExcel.download = function (filename, data) {
+    toExcel.download = function (filename, data) {
       try {
           var blob = new Blob([data], { type: "text/csv" });
           if (window.navigator.msSaveOrOpenBlob) {
@@ -40,7 +40,7 @@ var ToExcel = /** @class */ (function () {
           
       }
     }
-    ToExcel.parseXML = function (input) {
+    toExcel.parseXML = function (input) {
       var output;
       if (!input) return "";
       output = input.toString().replace(/</g, "&lt;");
@@ -49,7 +49,7 @@ var ToExcel = /** @class */ (function () {
       return output;
     }
 
-    ToExcel.generateXML = function (columns, data, filename) {
+    toExcel.generateXML = function (columns, data, filename) {
       var xml = "";
       if (columns && data) {
         xml =
@@ -87,7 +87,7 @@ var ToExcel = /** @class */ (function () {
       return xml;
     }
 
-    ToExcel.getData = function (row, item) {
+    toExcel.getData = function (row, item) {
       let obj = row;
       try {
         item.toString().split('.').forEach(function(key) { obj = obj[key] });        
@@ -96,6 +96,6 @@ var ToExcel = /** @class */ (function () {
       }
       return obj;
     }
-    return ToExcel;
+    return toExcel;
 }());
-exports.ToExcel = ToExcel;
+exports.toExcel = toExcel;

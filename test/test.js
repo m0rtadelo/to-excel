@@ -1,5 +1,5 @@
 var assert = require('assert');
-const toExcel = require('../index').ToExcel;
+const toExcel = require('../index').toExcel;
 const expect1 = `<Row><Cell><Data ss:Type="String">1</Data></Cell><Cell><Data ss:Type="String">Item 1 &lt;br&gt;</Data></Cell><Cell><Data ss:Type="String">가지마</Data></Cell>
 </Row>
 <Row><Cell><Data ss:Type="String"></Data></Cell><Cell><Data ss:Type="String">Item 2</Data></Cell><Cell><Data ss:Type="String">благодарю вас</Data></Cell>
