@@ -23,7 +23,7 @@ toExcel.exportXLS = function (columns, data, filename, options) {
         if(!options.extension) {
           options.extension = "xls";
         }
-        const xml = this.generateXML(columns, data, filename);
+        var xml = this.generateXML(columns, data, filename);
         this.download(filename + "." + options.extension, xml);
         return xml;
     }
@@ -65,7 +65,7 @@ toExcel.generateXML = function (columns, data, filename) {
       return xml;
     }
 toExcel.getData = function (row, item) {
-      let obj = row;
+      var obj = row;
       try {
         item.toString().split('.').forEach(function(key) { obj = obj[key] });        
       } catch (error) {
