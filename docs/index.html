@@ -26,6 +26,9 @@
             { label: 'Status', field: 'status.item' }
         ]
 
+        // set replacement values (optional)
+        toExcel.setReplace('Item 1 <br>', 'Item 1')
+
         toExcel.exportXLS(headers, data, 'filename');
     </script>
 </body>
