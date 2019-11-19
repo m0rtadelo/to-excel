@@ -1,6 +1,6 @@
 {
   "name": "to-excel",
-  "version": "2.1.2",
+  "version": "2.1.3",
   "description": "Util to generate compatible Excel xls file (xml in fact). Works with node and browser. CommonJS and ES6 module compatible. Works in all browsers (IE9+)",
   "main": "index.js",
   "scripts": {
