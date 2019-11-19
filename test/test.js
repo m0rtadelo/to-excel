@@ -8,7 +8,14 @@ const expect1 = `<Row><Cell><Data ss:Type="String">1</Data></Cell><Cell><Data ss
 </Row>
 <Row><Cell><Data ss:Type="String">4</Data></Cell><Cell><Data ss:Type="String">Item 4 &quot;quotes&quot;</Data></Cell><Cell><Data ss:Type="String"></Data></Cell>
 </Row>`;
-
+const expect2 = `<Row><Cell><Data ss:Type="String">1</Data></Cell><Cell><Data ss:Type="String">Item 1 &lt;br&gt;</Data></Cell><Cell><Data ss:Type="String">가지마</Data></Cell>
+</Row>
+<Row><Cell><Data ss:Type="String"></Data></Cell><Cell><Data ss:Type="String">value replaced</Data></Cell><Cell><Data ss:Type="String">благодарю вас</Data></Cell>
+</Row>
+<Row><Cell><Data ss:Type="String">3</Data></Cell><Cell><Data ss:Type="String">Item 3 'quotes'</Data></Cell><Cell><Data ss:Type="String">Enabled</Data></Cell>
+</Row>
+<Row><Cell><Data ss:Type="String">4</Data></Cell><Cell><Data ss:Type="String">Item 4 &quot;quotes&quot;</Data></Cell><Cell><Data ss:Type="String"></Data></Cell>
+</Row>`;
 // set data
 const data = [
     { id: 1, value: 'Item 1 <br>', status: { item: '가지마' } },
@@ -44,4 +51,10 @@ describe('usage', function () {
         const content = toExcel.exportXLS( headers, data, 'test' );        
         assert.equal(content.includes(expect1), true, 'incorrect export')
     }) 
+
+    it('should replace values correctly', function() {
+        toExcel.setReplace('Item 2', 'value replaced');
+        const content = toExcel.exportXLS( headers, data, 'test' );  
+        assert.equal(content.includes(expect2), true, 'incorrect export')  
+    })
 });
