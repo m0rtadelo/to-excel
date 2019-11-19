@@ -82,3 +82,21 @@ toExcel.parseXML = function (input) {
     output = output.replace(new RegExp('"', "g"), "&quot;");
     return output;
   }
+toExcel.setReplace = function (value, replacementValue) {
+    if(value !== undefined && replacementValue !== undefined) {
+      this.replaceItems.push({value, replacementValue})
+    }
+  }
+toExcel.clearReplace = function() {
+    this.replaceItems = [];
+  }
+toExcel.replaceItems = new Array;
+function replaceValue(value) {
+    for(var i = 0; i < toExcel.replaceItems.length ; i++) {
+      const item = toExcel.replaceItems[i];
+      if (item.value === value) {
+        return item.replacementValue;
+      }
+    }
+    return value;
+}
