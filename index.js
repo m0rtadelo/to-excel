@@ -8,6 +8,10 @@
 exports.__esModule = true;
 var toExcel = /** @class */ (function () {
     function toExcel() {
+      var replaceItems = [];
+    }
+    toExcel.setReplace = function (value, replacementValue) {
+      replaceItems.push({value, replacementValue})
     }
     /**
      * exports the data to a XLS file (as XML)
