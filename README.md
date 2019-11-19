@@ -40,6 +40,8 @@ var headers = [
     { label: 'Status', field: 'status.item' }
 ]
 
+// set replacement values (optional)
+toExcel.setReplace('Item 1 <br>', 'Item 1')
 // generate excel file (will download 'filename.xls' from browser)
 var content = toExcel.exportXLS( headers, data, 'filename' );
 // in node you must open or save the content
