@@ -10,6 +10,12 @@ data += "\ntoExcel.parseXML = " + te.parseXML.toString();
 data += "\ntoExcel.setReplace = " + te.setReplace.toString();
 data += "\ntoExcel.clearReplace = " + te.clearReplace.toString();
 data += "\ntoExcel.replaceItems = new Array;"
-
+data += `function replaceValue(value) {
+    for(var i = 0; i < toExcel.replaceItems.length ; i++) {
+      const item = toExcel.replaceItems[i];
+      if (item.value === value) {
+        return item.replacementValue;
+      }
+    }`
 fs.writeFileSync('../docs/to-excel.js', data);
 // console.log(data);
