@@ -6,11 +6,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Test</title>
+    <link href="prism.css" rel="stylesheet" />
     <script src="to-excel.js"></script>
-</head>
+    <style>
+        body {
+            background-color: dimgray;
+        }
+        div {
+            width: 50em;
+            box-shadow: 10px 10px 5px;
+        }
+    </style>
+</head> 
 
 <body>
-    <script>
+    <script id="code">
         // set data
         var data = [
             { id: 1, value: 'Item 1 <br>', status: { item: '가지마' } },
@@ -29,8 +39,16 @@
         // set replacement values (optional)
         toExcel.setReplace('Item 1 <br>', 'Item 1')
 
-        toExcel.exportXLS(headers, data, 'filename');
+        // toExcel.exportXLS(headers, data, 'filename');
     </script>
+    <div>
+        <pre><code id="container" class="language-javascript">
+        </code></pre>
+    </div>
+    <script>
+            document.getElementById("container").innerHTML = document.getElementById("code").innerHTML;
+    </script>
+    <script src="prism.js"></script>
 </body>
 
 </html>
