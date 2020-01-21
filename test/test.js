@@ -72,13 +72,44 @@ describe('usage', function () {
         toExcel.clearReplace()
         assert.equal(toExcel.replaceItems.length, 0, 'error clearing items')
     })
-    it('should download if possible by default', () => {
+    it('should download if possible by default (method 1)', () => {
         window = {
             navigator: { 
                 msSaveOrOpenBlob: true ,
-                msSaveBlob: (blob, filename) => {assert.equal(filename, 'test.xls')}
+                msSaveBlob: (blob, filename) => {
+                    assert.equal(filename, 'test.xls')
+                    assert.equal(blob.includes(expect2), true)
+                }
             }
         }
         const result = toExcel.exportXLS( headers, data, 'test' );
     })
+
+    it('should download if possible by default (method 2)', () => {
+        let valid = false
+        window = {
+            navigator: { 
+                msSaveOrOpenBlob: false,
+            },
+            document: {
+                createElement: elem => {return {click: () => {
+                    valid = true
+                }, elem }},
+            },
+            URL: {
+                createObjectURL: elem => elem
+            }
+        }
+        document = {
+            body: {
+                appendChild: elem => elem,
+                removeChild: elem => {
+                    assert.equal(elem.download, 'test.xls')
+                    assert.equal(valid, true)
+                }
+            }
+        }
+        const result = toExcel.exportXLS( headers, data, 'test' );
+    })
+
 });
