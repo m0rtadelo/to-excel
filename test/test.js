@@ -31,8 +31,13 @@ const headers = [
     { label: 'Status', field: 'status.item' }
 ]
 
+// fake browser objects
+function Blob() {}
+global.Blob = Blob
+
 describe('load', function () {
     it('should load on require', function () {
+        toExcel()
         assert.notEqual(toExcel, undefined, 'module not loaded')
     });
 });
@@ -50,11 +55,30 @@ describe('usage', function () {
         // generate excel file
         const content = toExcel.exportXLS( headers, data, 'test' );        
         assert.equal(content.includes(expect1), true, 'incorrect export')
+        const content2 = toExcel.exportXLS( headers, data, 'test', {extension: 'xls'} ); 
+        assert.equal(content2.includes(expect1), true, 'incorrect export')
     }) 
 
     it('should replace values correctly', function() {
+        toExcel.setReplace(undefined, undefined)
+        assert.equal(toExcel.replaceItems.length, 0)
         toExcel.setReplace('Item 2', 'value replaced');
         const content = toExcel.exportXLS( headers, data, 'test' );  
-        assert.equal(content.includes(expect2), true, 'incorrect export')  
+        assert.equal(content.includes(expect2), true, 'incorrect replace')  
+        
+    })
+    it('should clear items correctly', () => {
+        toExcel.replaceItems.push('item')
+        toExcel.clearReplace()
+        assert.equal(toExcel.replaceItems.length, 0, 'error clearing items')
+    })
+    it('should download if possible by default', () => {
+        window = {
+            navigator: { 
+                msSaveOrOpenBlob: true ,
+                msSaveBlob: (blob, filename) => {assert.equal(filename, 'test.xls')}
+            }
+        }
+        const result = toExcel.exportXLS( headers, data, 'test' );
     })
 });
