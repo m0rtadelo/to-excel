@@ -16,16 +16,22 @@ toExcel.download = function (filename, data) {
         
     }
   }
-toExcel.exportXLS = function (columns, data, filename, options) {
-      if(!options) {
-        options = {}
-      }
-      if(!options.extension) {
-        options.extension = "xls";
-      }
-      var xml = this.generateXML(columns, data, filename);
-      this.download(filename + "." + options.extension, xml);
-      return xml;
+toExcel.exportXLS = function (columns, data, options) {
+    if (typeof options === 'string') {
+      options = { filename: options }
+    }
+    if(!options) {
+      options = { filename: undefined }
+    }
+    if(!options.extension) {
+      options.extension = "xls";
+    }
+    
+    var xml = this.generateXML(columns, data, options.filename);
+    if (options.download !== false) {
+      this.download(options.filename + "." + options.extension, xml);
+    }
+    return xml;
   }
 toExcel.generateXML = function (columns, data, filename) {
     var xml = "";
