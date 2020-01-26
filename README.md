@@ -53,22 +53,22 @@ Demo: <https://m0rtadelo.github.io/to-excel/>
 ## Parameters
 
 The entry function `exportXLS(headers, data, options)` will allow the next parameters:
-  * **headers (Object)** : Sets the headers of the worksheet. *Required*
-  * **data (Object)** : Sets the data of the worksheet. *Required*
-  * **options (Object)** : Options to define behaviour. *Optional*
+* **headers (Object)** : Sets the headers of the worksheet. *Required*
+* **data (Object)** : Sets the data of the worksheet. *Required*
+* **options (Object)** : Options to define behaviour. *Optional*
 
 ### headers
 
 This object defines column labels and maps worksheet data.
 
-  * **label (string)** : Sets the column label. *Required*
-  * **field (string)** : Sets the data field identificator. *Required*
+* **label (string)** : Sets the column label. *Required*
+* **field (string)** : Sets the data field identificator. *Required*
 
 ### Options
 
 The next options can be passed to `exportXLS` function to change defaut behaviors:
-  * **filename (string)** : Sets the filename (without extension, the extension will be added by default). *Default: undefined*
-  * **extension (string)** : Sets the extension of the filename. *Default: xls*
-  * **download (boolean)** : Sets the browser download action. *Default: true*
+* **filename (string)** : Sets the filename (without extension, the extension will be added by default). *Default: undefined*
+* **extension (string)** : Sets the extension of the filename. *Default: xls*
+* **download (boolean)** : Sets the browser download action. *Default: true*
 
 > this option keys must be passed into an object but, if string is detected `filename` will be used to store it.
