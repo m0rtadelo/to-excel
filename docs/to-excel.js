@@ -93,7 +93,7 @@ toExcel.setReplace = function (value, replacementValue) {
       this.replaceItems.push({value, replacementValue})
     }
   }
-toExcel.clearReplace = function () {
+toExcel.clearReplace = function() {
     this.replaceItems = [];
   }
 toExcel.replaceItems = new Array;
