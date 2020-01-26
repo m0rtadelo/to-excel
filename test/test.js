@@ -73,20 +73,24 @@ describe('usage', function () {
         assert.equal(toExcel.replaceItems.length, 0, 'error clearing items')
     })
     it('should download if possible by default (method 1)', () => {
+        download = false
         window = {
             navigator: { 
                 msSaveOrOpenBlob: true ,
                 msSaveBlob: (blob, filename) => {
+                    download = true
                     assert.equal(filename, 'test.xls')
                     assert.equal(blob.includes(expect2), true)
                 }
             }
         }
         const result = toExcel.exportXLS( headers, data, 'test' );
+        assert.equal(download, true);
     })
 
     it('should download if possible by default (method 2)', () => {
         let valid = false
+        download = false
         window = {
             navigator: { 
                 msSaveOrOpenBlob: false,
@@ -104,12 +108,47 @@ describe('usage', function () {
             body: {
                 appendChild: elem => elem,
                 removeChild: elem => {
+                    download = true
                     assert.equal(elem.download, 'test.xls')
                     assert.equal(valid, true)
                 }
             }
         }
         const result = toExcel.exportXLS( headers, data, 'test' );
+        assert.equal(download, true);
     })
 
+    it('should work without options', () => {
+        const result = toExcel.exportXLS( headers, data);
+        assert.equal(result.includes(expect1), true, 'incorrect export')
+    })
+
+    it('should set extension if defined in options', () => {
+        let download = false
+        window = {
+            navigator: { 
+                msSaveOrOpenBlob: true ,
+                msSaveBlob: (blob, filename) => {
+                    download = true
+                    assert.equal(filename, 'test.pdf')
+                    assert.equal(blob.includes(expect2), true)
+                }
+            }
+        }
+        const result = toExcel.exportXLS( headers, data, { filename: 'test', extension: 'pdf' });
+        assert.equal(download, true);
+    })   
+    it('should disable download if defined in options', () => {
+        result = true
+        window = {
+            navigator: { 
+                msSaveOrOpenBlob: true ,
+                msSaveBlob: (blob, filename) => {
+                    result = false
+                }
+            }
+        }
+        toExcel.exportXLS( headers, data, { download: false });
+        assert.equal(result, true)
+    })        
 });
