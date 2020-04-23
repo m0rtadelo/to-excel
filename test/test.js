@@ -16,6 +16,14 @@ const expect2 = `<Row><Cell><Data ss:Type="String">1</Data></Cell><Cell><Data ss
 </Row>
 <Row><Cell><Data ss:Type="String">4</Data></Cell><Cell><Data ss:Type="String">Item 4 &quot;quotes&quot;</Data></Cell><Cell><Data ss:Type="String"></Data></Cell>
 </Row>`;
+const expect3 = `<Row><Cell><Data ss:Type="String">1</Data></Cell><Cell><Data ss:Type="Number">1</Data></Cell><Cell><Data ss:Type="String">가지마</Data></Cell>
+</Row>
+<Row><Cell><Data ss:Type="String"></Data></Cell><Cell><Data ss:Type="Number">2</Data></Cell><Cell><Data ss:Type="String">благодарю вас</Data></Cell>
+</Row>
+<Row><Cell><Data ss:Type="String">3</Data></Cell><Cell><Data ss:Type="Number">3.5</Data></Cell><Cell><Data ss:Type="String">Enabled</Data></Cell>
+</Row>
+<Row><Cell><Data ss:Type="String">4</Data></Cell><Cell><Data ss:Type="Number">2.54</Data></Cell><Cell><Data ss:Type="String"></Data></Cell>
+</Row>`;
 // set data
 const data = [
     { id: 1, value: 'Item 1 <br>', status: { item: '가지마' } },
@@ -31,6 +39,19 @@ const headers = [
     { label: 'Status', field: 'status.item' }
 ]
 
+const data2 = [
+    { id: 1, value: '1', status: { item: '가지마' } },
+    { value: '2', status: { item: 'благодарю вас' } },
+    { value: '3.5', id: 3, status: { item: 'Enabled' } },
+    { id: 4, value: '2.54', extra: 'ignored field' }
+];
+
+// set headers
+const headers2 = [
+    { label: 'Identificator', field: 'id' },
+    { label: 'Description', field: 'value', type: 'Number' },
+    { label: 'Status', field: 'status.item' }
+]
 // fake browser objects
 function Blob() {}
 global.Blob = Blob
@@ -151,4 +172,8 @@ describe('usage', function () {
         toExcel.exportXLS( headers, data, { download: false });
         assert.equal(result, true)
     })        
+    it('should set type to Number if defined in headers', () => {
+        const result = toExcel.exportXLS(headers2, data2)
+        assert.equal(result.includes(expect3), true, 'incorrect type')
+    })
 });

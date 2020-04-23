@@ -63,6 +63,7 @@ This object defines column labels and maps worksheet data.
 
 * **label (string)** : Sets the column label. *Required*
 * **field (string)** : Sets the data field identificator. *Required*
+* **type (string)** : Sets the type data of the column (String, Number, etc.). *Optional*
 
 ### Options
 
