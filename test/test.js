@@ -24,6 +24,16 @@ const expect3 = `<Row><Cell><Data ss:Type="String">1</Data></Cell><Cell><Data ss
 </Row>
 <Row><Cell><Data ss:Type="String">4</Data></Cell><Cell><Data ss:Type="Number">2.54</Data></Cell><Cell><Data ss:Type="String"></Data></Cell>
 </Row>`;
+const expect4 = `<Cell ss:StyleID="hdr"><Data ss:Type="String">Identificator</Data></Cell>
+<Cell ss:StyleID="hdr"><Data ss:Type="String">Description</Data></Cell>
+<Cell ss:StyleID="hdr"><Data ss:Type="String">Status</Data></Cell></Row>
+<Row><Cell><Data ss:Type="String">1</Data></Cell><Cell><Data ss:Type="Number">0</Data></Cell><Cell><Data ss:Type="String">가지마</Data></Cell>
+</Row>
+<Row><Cell><Data ss:Type="String"></Data></Cell><Cell><Data ss:Type="Number">2</Data></Cell><Cell><Data ss:Type="String">благодарю вас</Data></Cell>
+</Row>
+<Row><Cell><Data ss:Type="String">3</Data></Cell><Cell><Data ss:Type="Number">3.5</Data></Cell><Cell><Data ss:Type="String">Enabled</Data></Cell>
+</Row>
+<Row><Cell><Data ss:Type="String">4</Data></Cell><Cell><Data ss:Type="Number">2.54</Data></Cell><Cell><Data ss:Type="String"></Data></Cell>`
 // set data
 const data = [
     { id: 1, value: 'Item 1 <br>', status: { item: '가지마' } },
@@ -52,6 +62,14 @@ const headers2 = [
     { label: 'Description', field: 'value', type: 'Number' },
     { label: 'Status', field: 'status.item' }
 ]
+
+const data3 = [
+    { id: 1, value: 0, status: { item: '가지마' } },
+    { value: '2', status: { item: 'благодарю вас' } },
+    { value: '3.5', id: 3, status: { item: 'Enabled' } },
+    { id: 4, value: '2.54', extra: 'ignored field' }
+];
+
 // fake browser objects
 function Blob() {}
 global.Blob = Blob
@@ -176,4 +194,9 @@ describe('usage', function () {
         const result = toExcel.exportXLS(headers2, data2)
         assert.equal(result.includes(expect3), true, 'incorrect type')
     })
+    it('should not remove zero Number if defined in headers', () => {
+        const result = toExcel.exportXLS(headers2, data3)
+        assert.equal(result.includes(expect4), true, 'incorrect result')
+    })
+
 });
