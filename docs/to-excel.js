@@ -34,7 +34,6 @@ toExcel.exportXLS = function (columns, data, options) {
     return xml;
   }
 toExcel.generateXML = function (columns, data, filename) {
-    var typ = (value) => !isNaN(value) ? "Number" : "String"
     var xml = "";
     if (columns && data) {
       xml =
@@ -60,10 +59,11 @@ toExcel.generateXML = function (columns, data, filename) {
         xml = xml + "\n<Row>";
         for (var l = 0; l < columns.length; l++) {
           const t = columns[l].type ? columns[l].type : "String"
+          const r = this.parseXML(this.getData(data[i], [columns[l].field]))
           xml =
             xml +
             '<Cell><Data ss:Type="' + t+ '">' +
-            this.parseXML(this.getData(data[i], [columns[l].field])) +
+            (t === 'Number' ? +r : r) +
             "</Data></Cell>";
         }
         xml = xml + "\n</Row>";
@@ -95,7 +95,7 @@ toExcel.setReplace = function (value, replacementValue) {
       this.replaceItems.push({value, replacementValue})
     }
   }
-toExcel.clearReplace = function () {
+toExcel.clearReplace = function() {
     this.replaceItems = [];
   }
 toExcel.replaceItems = new Array;
