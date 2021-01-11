@@ -61,6 +61,7 @@ var toExcel = /** @class */ (function () {
     output = input.toString().replace(/</g, "&lt;");
     output = output.replace(new RegExp(">", "g"), "&gt;");
     output = output.replace(new RegExp('"', "g"), "&quot;");
+    output = output.replace(new RegExp("&", "g"), "&amp;");
     return output;
   }
 
