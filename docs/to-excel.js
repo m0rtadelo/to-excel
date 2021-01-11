@@ -85,7 +85,8 @@ toExcel.getData = function (row, item) {
 toExcel.parseXML = function (input) {
     var output;
     if (!input) return "";
-    output = input.toString().replace(/</g, "&lt;");
+    output = input.toString().replace(new RegExp("&", "g"), "&amp;");
+    output = output.replace(/</g, "&lt;");
     output = output.replace(new RegExp(">", "g"), "&gt;");
     output = output.replace(new RegExp('"', "g"), "&quot;");
     return output;
@@ -95,7 +96,7 @@ toExcel.setReplace = function (value, replacementValue) {
       this.replaceItems.push({value, replacementValue})
     }
   }
-toExcel.clearReplace = function () {
+toExcel.clearReplace = function() {
     this.replaceItems = [];
   }
 toExcel.replaceItems = new Array;
