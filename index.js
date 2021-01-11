@@ -58,10 +58,10 @@ var toExcel = /** @class */ (function () {
   toExcel.parseXML = function (input) {
     var output;
     if (!input) return "";
-    output = input.toString().replace(/</g, "&lt;");
+    output = input.toString().replace(new RegExp("&", "g"), "&amp;");
+    output = output.replace(/</g, "&lt;");
     output = output.replace(new RegExp(">", "g"), "&gt;");
     output = output.replace(new RegExp('"', "g"), "&quot;");
-    output = output.replace(new RegExp("&", "g"), "&amp;");
     return output;
   }
 
