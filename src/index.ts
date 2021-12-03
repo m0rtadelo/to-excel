@@ -1,3 +1,6 @@
+import { DEFAULT_EXT, X_CELL_END, X_CELL_START, X_FOOTER, X_HEADER, X_PROPS, X_STYLES } from './constants';
+import { IHeader, IOptions } from './interfaces';
+
 /**
  * project: to-excel
  * author: m0rtadelo (ricard.figuls)
@@ -5,145 +8,157 @@
  * 2019
  */
 export class toExcel {
-  private static replaceItems = new Array;
+  private static replaceItems:any[] = [];
 
-  private static setReplace(value?: string, replacementValue?: string) {
-    if (value && replacementValue) {
-      toExcel.replaceItems.push({value, replacementValue})
-    }
-  }
-
-  private static clearReplace() {
-    toExcel.replaceItems = []
-  }
-
-  private static parseXML(input: string) {
-    var output: string;
-    if (!input) return "";
-    output = input.toString().replace(new RegExp("&", "g"), "&amp;");
-    output = output.replace(/</g, "&lt;");
-    output = output.replace(new RegExp(">", "g"), "&gt;");
-    output = output.replace(new RegExp('"', "g"), "&quot;");
-    return output;
-  }
-}
-  function toEx() {
-  }
-  toEx.replaceItems = new Array;
-  toEx.setReplace = function (value, replacementValue) {
-    if(value !== undefined && replacementValue !== undefined) {
-      this.replaceItems.push({value, replacementValue})
-    }
-  }
-  toEx.clearReplace = function() {
-    this.replaceItems = [];
-  }
   /**
-   * exports the data to a XLS file (as XML)
+   * Generates compatible Excel xls file (xml in fact) and returns content and downloads (if set)
+   * @param columns This object defines column labels and maps worksheet data.
+   * @param data  Sets the data of the worksheet.
+   * @param options Options to define behaviour
+   * @returns content of file
    */
-  toEx.exportXLS = function (columns, data, options) {
+  public static exportXLS(columns: IHeader[], data: any[], options?: IOptions|string): string {
+    options = options || { filename: undefined };
     if (typeof options === 'string') {
-      options = { filename: options }
+      options = { filename: options };
     }
-    if(!options) {
-      options = { filename: undefined }
-    }
-    if(!options.extension) {
-      options.extension = "xls";
-    }
-    
-    var xml = this.generateXML(columns, data, options.filename);
-    if (options.download !== false) {
-      this.download(options.filename + "." + options.extension, xml);
+    options.extension = options.extension || DEFAULT_EXT;
+
+    const xml = toExcel.generateXML(columns, data, options.filename);
+    if (options.download) {
+      toExcel.download(options.filename + '.' + options.extension, xml);
     }
     return xml;
   };
-  toEx.download = function (filename, data) {
-    try {
-        var blob = new Blob([data], { type: "text/csv" });
-        if ((window.navigator as any).msSaveOrOpenBlob) {
-          (window.navigator as any).msSaveBlob(blob, filename);
-        } else {
-          var elem = window.document.createElement("a");
-          elem.href = window.URL.createObjectURL(blob);
-          elem.download = filename;
-          document.body.appendChild(elem);
-          elem.click();
-          document.body.removeChild(elem);
-        }          
-    } catch (error) {
-        
-    }
-  }
-  toEx.parseXML = function (input) {
-    var output;
-    if (!input) return "";
-    output = input.toString().replace(new RegExp("&", "g"), "&amp;");
-    output = output.replace(/</g, "&lt;");
-    output = output.replace(new RegExp(">", "g"), "&gt;");
-    output = output.replace(new RegExp('"', "g"), "&quot;");
-    return output;
-  }
 
-  toEx.generateXML = function (columns, data, filename) {
-    var xml = "";
-    if (columns && data) {
-      xml =
-        '<?xml version="1.0"?>\n<?mso-application progid="Excel.Sheet"?>\n<Workbook\nxmlns="urn:schemas-microsoft-com:office:spreadsheet"\nxmlns:o="urn:schemas-microsoft-com:office:office"\nxmlns:x="urn:schemas-microsoft-com:office:excel"\nxmlns:ss="urn:schemas-microsoft-com:office:spreadsheet"\nxmlns:html="http://www.w3.org/TR/REC-html40">\n';
-      xml =
-        xml +
-        '<DocumentProperties xmlns="urn:schemas-microsoft-com:office:office">\n<Author>Ricard Fíguls</Author>\n<LastAuthor>Ricard Fíguls</LastAuthor>\n<Company>RFM Software (Ricard Figuls)</Company>\n<Version>1</Version>\n</DocumentProperties>\n';
-      xml =
-        xml +
-        '<Styles><Style ss:ID="hdr"><Font ss:Color="#ffffff" ss:Bold="1" /><Interior ss:Color="#000000" ss:Pattern="Solid"/></Style></Styles>';
+  /**
+   * Generates compatible Excel xls file (xml in fact)
+   * @param columns This object defines column labels and maps worksheet data.
+   * @param data Sets the data of the worksheet.
+   * @param filename The filename
+   * @returns content of file
+   */
+  private static generateXML(columns: IHeader[], data: any[], filename: string|undefined): string {
+    let xml = '';
+    if (columns.length && data) {
+      xml = X_HEADER;
+      xml += X_PROPS;
+      xml += X_STYLES;
       xml = xml + '<Worksheet ss:Name="' + filename + '"><Table>';
-      xml = xml + "\n<Row>";
-      for (var i = 0; i < columns.length; i++) {
-        xml =
-          xml +
-          '\n<Cell ss:StyleID="hdr"><Data ss:Type="String">' +
-          this.parseXML(columns[i].label) +
-          "</Data></Cell>";
+      xml = xml + '\n<Row>';
+      for (const column of columns) {
+        xml += X_CELL_START +
+          this.parseXML(column.label) +
+          X_CELL_END;
       }
-      xml = xml + "</Row>";
-      for (var i = 0; i < data.length; i++) {
-        // NOSONAR
-        xml = xml + "\n<Row>";
-        for (var l = 0; l < columns.length; l++) {
-          const t = columns[l].type ? columns[l].type : "String"
-          const r = this.parseXML(this.getData(data[i], [columns[l].field]))
+      xml = xml + '</Row>';
+      for (const item of data) {
+        xml = xml + '\n<Row>';
+        for (const column of columns) {
+          const t = column.type ? column.type : 'String';
+          const r = this.parseXML(this.getData(item, column.field));
           xml =
             xml +
             '<Cell><Data ss:Type="' + t+ '">' +
             (t === 'Number' ? +r : r) +
-            "</Data></Cell>";
+            '</Data></Cell>';
         }
-        xml = xml + "\n</Row>";
+        xml = xml + '\n</Row>';
       }
-      xml = xml + "\n</Table></Worksheet>\n</Workbook>";
+      xml += X_FOOTER;
     }
     return xml;
   }
 
-  toEx.getData = function (row, item) {
-    var obj = row;
+  /**
+   * Uses browser download mechanism to open the file
+   * @param filename The filename
+   * @param data The data to be in the file
+   * @returns void
+   */
+  private static download(filename: string, data: any) {
     try {
-      item.toString().split('.').forEach(function(key) { obj = obj[key] });        
+      const blob = new Blob([data], { type: 'text/csv' });
+      if ((window.navigator as any).msSaveOrOpenBlob) {
+        (window.navigator as any).msSaveBlob(blob, filename);
+      } else {
+        const elem = window.document.createElement('a');
+        elem.href = window.URL.createObjectURL(blob);
+        elem.download = filename;
+        document.body.appendChild(elem);
+        elem.click();
+        document.body.removeChild(elem);
+      }
+    } catch (error) {}
+  }
+
+  /**
+   * Returns the correct data value
+   * @param row Data object that contains value
+   * @param item The name of the item where data is
+   * @returns The value
+   */
+  private static getData(row: any, item: string) {
+    let obj = row;
+    try {
+      item.toString().split('.').forEach(function(key) {
+        obj = obj[key];
+      });
     } catch (error) {
       obj = undefined;
     }
 
-    return replaceValue(obj);
+    return toExcel.replaceValue(obj);
   }
 
-  function replaceValue(value) {
-    for(var i = 0; i < toEx.replaceItems.length ; i++) {
-      const item = toEx.replaceItems[i];
+  /**
+   * Replaces value
+   * @param value value
+   * @param replacementValue replacementValue
+   * @returns void
+   */
+  private static setReplace(value?: string, replacementValue?: string) {
+    if (value && replacementValue) {
+      toExcel.replaceItems.push({ value, replacementValue });
+    }
+  }
+
+  /**
+   * Clears the replace values
+   * @returns void
+   */
+  private static clearReplace(): void {
+    toExcel.replaceItems = [];
+  }
+
+  /**
+   * Sanitizes the string to be used in the XML value cell
+   * @param input The input string to sanitize
+   * @returns Sanitized xml string
+   */
+  private static parseXML(input: string) {
+    let output: string;
+    if (!input) return '';
+    output = input.toString().replace(new RegExp('&', 'g'), '&amp;');
+    output = output.replace(/</g, '&lt;');
+    output = output.replace(new RegExp('>', 'g'), '&gt;');
+    output = output.replace(new RegExp('"', 'g'), '&quot;');
+    return output;
+  }
+
+  /**
+   * Replaces the value
+   * @param value The vaue to be replaced
+   * @returns The value or replaced value
+   */
+  private static replaceValue(value: string): string {
+    for (let i = 0; i < toExcel.replaceItems.length; i++) {
+      const item = toExcel.replaceItems[i];
       if (item.value === value) {
         return item.replacementValue;
       }
     }
-  
+
     return value;
   }
-exports.toEx = toEx;
+}
