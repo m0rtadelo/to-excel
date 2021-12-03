@@ -12,7 +12,8 @@
     "lint": "eslint ./src --ext .ts",
     "lint:fix": "eslint ./src --ext .ts --fix",
     "doc": "npx typedoc src/*.ts",
-    "build": "tsc -p ./tsconfig.json && tsc -p ./tsconfig.cjs.json"
+    "build": "tsc -p ./tsconfig.json && tsc -p ./tsconfig.cjs.json",
+    "build:browser": "webpack"
   },
   "keywords": [
     "export",
@@ -33,17 +34,20 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "fs-extra": "^7.0.1",
-    "jsdoc": "^3.6.4",
     "@types/jest": "^27.0.3",
     "@types/node": "^16.11.7",
     "@typescript-eslint/eslint-plugin": "^5.4.0",
     "@typescript-eslint/parser": "^5.4.0",
     "eslint": "^8.2.0",
     "eslint-config-google": "^0.14.0",
+    "fs-extra": "^7.0.1",
     "jest": "^27.3.1",
+    "jsdoc": "^3.6.4",
     "ts-jest": "^27.0.7",
+    "ts-loader": "^9.2.6",
     "typedoc": "^0.22.9",
-    "typescript": "^4.4.4"
+    "typescript": "^4.4.4",
+    "webpack": "^5.64.4",
+    "webpack-cli": "^4.9.1"
   }
 }
