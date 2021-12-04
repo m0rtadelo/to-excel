@@ -30,7 +30,7 @@ export class toExcel {
       toExcel.download(options.filename + '.' + options.extension, xml);
     }
     return xml;
-  };
+  }
 
   /**
    * Generates compatible Excel xls file (xml in fact)
