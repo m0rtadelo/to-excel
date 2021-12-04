@@ -13,7 +13,7 @@
     "lint:fix": "eslint ./src --ext .ts --fix",
     "build": "tsc -p ./tsconfig.json && tsc -p ./tsconfig.cjs.json",
     "build:browser": "webpack",
-    "docs": "npx typedoc src/*.ts && mkdir ./docs/demo && cp ./demo/* ./docs/demo/",
+    "docs": "npx typedoc src/*.ts && mkdir ./docs/demo && cp ./demo/* ./docs/demo/ && cp ./out/* ./docs",
     "pack": "npm pack"
   },
   "engines": {
