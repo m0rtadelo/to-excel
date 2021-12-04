@@ -22,7 +22,10 @@
     "ES6",
     "CommonJS",
     "xls",
-    "xml"
+    "xml",
+    "worksheet",
+    "cells",
+    "data"
   ],
   "author": "m0rtadelo",
   "bugs": {
