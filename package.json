@@ -11,7 +11,6 @@
     "test": "jest --coverage",
     "lint": "eslint ./src --ext .ts",
     "lint:fix": "eslint ./src --ext .ts --fix",
-    "doc": "npx typedoc src/*.ts",
     "build": "tsc -p ./tsconfig.json && tsc -p ./tsconfig.cjs.json",
     "build:browser": "webpack",
     "pack": "npm pack"
