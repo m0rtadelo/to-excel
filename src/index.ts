@@ -151,8 +151,7 @@ export class toExcel {
    * @returns The value or replaced value
    */
   private static replaceValue(value: string): string {
-    for (let i = 0; i < toExcel.replaceItems.length; i++) {
-      const item = toExcel.replaceItems[i];
+    for (const item of toExcel.replaceItems) {
       if (item.value === value) {
         return item.replacementValue;
       }

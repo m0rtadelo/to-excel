@@ -5,6 +5,6 @@
     "module": "es6",
     "outDir": "./out",
     "declaration": false,
-    "removeComments": true,
+    "removeComments": true
   }
 }
