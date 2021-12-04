@@ -94,7 +94,9 @@ export class toExcel {
         elem.click();
         document.body.removeChild(elem);
       }
-    } catch (error) {}
+    } catch (error) {
+      console.error(error);
+    }
   }
 
   /**
@@ -122,18 +124,10 @@ export class toExcel {
    * @param replacementValue replacementValue
    * @returns void
    */
-  private static setReplace(value?: string, replacementValue?: string) {
+  public static setReplace(value?: any, replacementValue?: any) {
     if (value && replacementValue) {
       toExcel.replaceItems.push({ value, replacementValue });
     }
-  }
-
-  /**
-   * Clears the replace values
-   * @returns void
-   */
-  private static clearReplace(): void {
-    toExcel.replaceItems = [];
   }
 
   /**

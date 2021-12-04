@@ -9,7 +9,7 @@ module.exports = {
   },
   output: {
     path: path.resolve(__dirname, './out'),
-    filename: 'toExcel.js', // <--- Will be compiled to this single file
+    filename: 'to-excel.js', // <--- Will be compiled to this single file
   },
   resolve: {
     extensions: ['.ts', '.tsx', '.js'],
@@ -20,7 +20,7 @@ module.exports = {
         test: /\.tsx?$/,
         loader: 'ts-loader',
         options: {
-          configFile: 'tsconfig.bro.json',
+          configFile: 'tsconfig.browser.json',
         },
       },
     ],

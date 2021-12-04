@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<?mso-application progid="Excel.Sheet"?>
+<Workbook
+xmlns="urn:schemas-microsoft-com:office:spreadsheet"
+xmlns:o="urn:schemas-microsoft-com:office:office"
+xmlns:x="urn:schemas-microsoft-com:office:excel"
+xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet"
+xmlns:html="http://www.w3.org/TR/REC-html40">
+<DocumentProperties xmlns="urn:schemas-microsoft-com:office:office">
+<Author>author</Author>
+<LastAuthor>lastAuthor</LastAuthor>
+<Company>company</Company>
+<Version>version</Version>
+</DocumentProperties>
+<Styles>
+<Style ss:ID="hdr"><Font ss:Color="#ffffff" ss:Bold="1" /><Interior ss:Color="#000000" ss:Pattern="Solid"/></Style>
+</Styles><Worksheet ss:Name="filename"><Table>
+<Row>
+<Cell ss:StyleID="hdr"><Data ss:Type="String">Identificator</Data></Cell>
+<Cell ss:StyleID="hdr"><Data ss:Type="String">Description</Data></Cell></Row>
+<Row><Cell><Data ss:Type="String">1</Data></Cell><Cell><Data ss:Type="Number">50</Data></Cell>
+</Row>
+<Row><Cell><Data ss:Type="String">2</Data></Cell><Cell><Data ss:Type="Number">150</Data></Cell>
+</Row>
+</Table></Worksheet>
+</Workbook>
