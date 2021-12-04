@@ -21,7 +21,7 @@ Compatible with all browsers (IE9+ included).
 
 ```javascript
 // include library (only one of the above methods)
-<script src="https://m0rtadelo.github.io/to-excel/to-excel.js"></script> // HTML
+<script src="https://github.com/m0rtadelo/to-excel/releases/latest/download/toExcel.js"></script> // HTML
 var toExcel = require('to-excel').toExcel;                               // CommonJS 
 import { toExcel } from 'to-excel';                                      // ES6 
 
