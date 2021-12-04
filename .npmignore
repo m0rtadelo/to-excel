@@ -1,8 +1,0 @@
-/test
-/travis
-.travis.yml
-/docs
-/test
-/.nyc_output
-/.vscode
-/coverage

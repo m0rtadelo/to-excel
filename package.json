@@ -1,13 +1,19 @@
 {
   "name": "to-excel",
-  "version": "2.2.3",
+  "version": "2.2.4",
   "description": "Util to generate compatible Excel xls file (xml in fact). Works with node and browser. CommonJS and ES6 module compatible. Works in all browsers (IE9+)",
-  "main": "index.js",
+  "main": "./lib/cjs/index.js",
+  "module": "./lib/esm/index.js",
+  "files": [
+    "lib/"
+  ],
   "scripts": {
-    "test": "nyc mocha",
-    "coverage": "nyc --reporter=lcov --reporter=text-lcov npm test",
-    "coveralls": "cd travis && node ./build.js && nyc npm test && nyc report --reporter=text-lcov | coveralls",
-    "build": "cd travis && node ./build.js"
+    "test": "jest --coverage",
+    "lint": "eslint ./src --ext .ts",
+    "lint:fix": "eslint ./src --ext .ts --fix",
+    "build": "tsc -p ./tsconfig.json && tsc -p ./tsconfig.cjs.json",
+    "build:browser": "webpack",
+    "pack": "npm pack"
   },
   "keywords": [
     "export",
@@ -28,8 +34,20 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "coveralls": "^3.0.6",
-    "mocha": "^5.2.0",
-    "nyc": "^14.1.1"
+    "@types/jest": "^27.0.3",
+    "@types/node": "^16.11.7",
+    "@typescript-eslint/eslint-plugin": "^5.4.0",
+    "@typescript-eslint/parser": "^5.4.0",
+    "eslint": "^8.2.0",
+    "eslint-config-google": "^0.14.0",
+    "fs-extra": "^7.0.1",
+    "jest": "^27.3.1",
+    "jsdoc": "^3.6.4",
+    "ts-jest": "^27.0.7",
+    "ts-loader": "^9.2.6",
+    "typedoc": "^0.22.9",
+    "typescript": "^4.4.4",
+    "webpack": "^5.64.4",
+    "webpack-cli": "^4.9.1"
   }
 }
