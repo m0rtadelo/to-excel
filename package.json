@@ -16,6 +16,9 @@
     "docs": "npx typedoc src/*.ts && mkdir ./docs/demo && cp ./demo/* ./docs/demo/",
     "pack": "npm pack"
   },
+  "engines": {
+    "node": ">=7.6"
+  },  
   "keywords": [
     "export",
     "excel",
