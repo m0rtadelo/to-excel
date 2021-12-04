@@ -48,7 +48,7 @@ var content = toExcel.exportXLS( headers, data, 'filename' );
 require('fs').writeFileSync('filename.xls', content);
 ```
 
-Demo: <https://m0rtadelo.github.io/to-excel/>
+Demo: <https://m0rtadelo.github.io/to-excel/demo/>
 
 ## Parameters
 
@@ -77,3 +77,5 @@ The next optional settings can be passed to `exportXLS` function to change defau
 *  **version (string)** : Sets the version metadata of the generated file.
 
 > this option keys must be passed into an object but, if string is detected `filename` will be used to store it.
+
+Full documentation available at: <https://m0rtadelo.github.io/to-excel/>

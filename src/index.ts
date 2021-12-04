@@ -76,7 +76,7 @@ export class toExcel {
   }
 
   /**
-   * Uses browser download mechanism to open the file
+   * Uses browser integrated method to download the generated file
    * @param filename The filename
    * @param data The data to be in the file
    * @returns void
