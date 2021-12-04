@@ -94,9 +94,7 @@ export class toExcel {
         elem.click();
         document.body.removeChild(elem);
       }
-    } catch (error) {
-      console.error(error);
-    }
+    } catch (error) {}
   }
 
   /**
