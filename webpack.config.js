@@ -2,10 +2,10 @@
 const path = require('path');
 
 module.exports = {
-  mode: 'development',
-  devtool: 'inline-source-map',
+  mode: 'production',
+  target: 'web',
   entry: {
-    main: './src/index.ts',
+    main: './src/web.ts',
   },
   output: {
     path: path.resolve(__dirname, './out'),
@@ -19,6 +19,9 @@ module.exports = {
       {
         test: /\.tsx?$/,
         loader: 'ts-loader',
+        options: {
+          configFile: 'tsconfig.bro.json',
+        },
       },
     ],
   },

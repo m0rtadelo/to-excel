@@ -25,7 +25,7 @@ export class toExcel {
     options.extension = options.extension || DEFAULT_EXT;
 
     const xml = toExcel.generateXML(columns, data, options.filename);
-    if (options.download) {
+    if (options.download !== false) {
       toExcel.download(options.filename + '.' + options.extension, xml);
     }
     return xml;
@@ -162,3 +162,4 @@ export class toExcel {
     return value;
   }
 }
+
