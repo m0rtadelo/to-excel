@@ -1,4 +1,5 @@
-import { DEFAULT_EXT, X_CELL_END, X_CELL_START, X_FOOTER, X_HEADER, X_PROPS, X_STYLES } from './constants';
+import { DEFAULT_AUTHOR, DEFAULT_COMPANY, DEFAULT_EXT, DEFAULT_VERSION, X_CELL_END, X_CELL_START, X_FOOTER, X_HEADER,
+  X_PROPS, X_ROW_END, X_ROW_START, X_STYLES } from './constants';
 import { IHeader, IOptions } from './interfaces';
 
 /**
@@ -24,7 +25,7 @@ export class toExcel {
     }
     options.extension = options.extension || DEFAULT_EXT;
 
-    const xml = toExcel.generateXML(columns, data, options.filename);
+    const xml = toExcel.generateXML(columns, data, options);
     if (options.download !== false) {
       toExcel.download(options.filename + '.' + options.extension, xml);
     }
@@ -35,23 +36,27 @@ export class toExcel {
    * Generates compatible Excel xls file (xml in fact)
    * @param columns This object defines column labels and maps worksheet data.
    * @param data Sets the data of the worksheet.
-   * @param filename The filename
+   * @param options Options to define behaviour
    * @returns content of file
    */
-  private static generateXML(columns: IHeader[], data: any[], filename: string|undefined): string {
+  private static generateXML(columns: IHeader[], data: any[], options: IOptions): string {
     let xml = '';
     if (columns.length && data) {
       xml = X_HEADER;
-      xml += X_PROPS;
+      xml += X_PROPS
+          .replace('%author', options.author || DEFAULT_AUTHOR)
+          .replace('%lastAuthor', options.lastAuthor || DEFAULT_AUTHOR)
+          .replace('%company', options.company || DEFAULT_COMPANY)
+          .replace('%version', options.version || DEFAULT_VERSION);
       xml += X_STYLES;
-      xml = xml + '<Worksheet ss:Name="' + filename + '"><Table>';
+      xml = xml + '<Worksheet ss:Name="' + options.filename + '"><Table>';
       xml = xml + '\n<Row>';
       for (const column of columns) {
         xml += X_CELL_START +
           this.parseXML(column.label) +
           X_CELL_END;
       }
-      xml = xml + '</Row>';
+      xml = xml + X_ROW_START;
       for (const item of data) {
         xml = xml + '\n<Row>';
         for (const column of columns) {
@@ -63,7 +68,7 @@ export class toExcel {
             (t === 'Number' ? +r : r) +
             '</Data></Cell>';
         }
-        xml = xml + '\n</Row>';
+        xml = xml + X_ROW_END;
       }
       xml += X_FOOTER;
     }

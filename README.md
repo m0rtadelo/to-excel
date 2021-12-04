@@ -7,7 +7,7 @@
 
 # toExcel
 
-Util to generate compatible Excel xls file (xml in fact). Works with node and browser. CommonJS and ES6 module compatible. No dependencies.
+Util to generate compatible Excel xls file (xml in fact). Works with node (typescript and javascript) and browser (using a html script tag). CommonJS and ES6 module compatible. No dependencies.
 
 Works with your favorite frameworks and libraries (Angular, React, Electron, Webpack...) and in the browser using the script tag. 
 
@@ -67,9 +67,13 @@ This object defines column labels and maps worksheet data.
 
 ### Options
 
-The next options can be passed to `exportXLS` function to change defaut behaviors:
+The next optional settings can be passed to `exportXLS` function to change defaut behaviors:
 * **filename (string)** : Sets the filename (without extension, the extension will be added by default). *Default: undefined*
 * **extension (string)** : Sets the extension of the filename. *Default: xls*
 * **download (boolean)** : Sets the browser download action. *Default: true*
+* **author (string)** : Sets the author metadata of the generated file.
+* **lastAuthor (sting)** : Sets the lastAuthor metadata of the generated file.
+* **company (string)** : Sets the company metadata of the generated file.
+* **version (string)** : Sets the version metadata of the generated file.
 
 > this option keys must be passed into an object but, if string is detected `filename` will be used to store it.

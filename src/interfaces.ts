@@ -11,6 +11,18 @@ export interface IOptions {
 
     /** Sets the browser download action. Default: true */
     download?: boolean,
+
+    /** Sets the author of the generated file */
+    author?: string,
+
+    /** Sets the lastAuthor of the generated file */
+    lastAuthor?: string,
+
+    /** Sets the company of the generated file */
+    company?: string,
+
+    /** Sets the version of the generated file */
+    version?: string,
 }
 
 export interface IHeader {
