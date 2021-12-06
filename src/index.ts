@@ -44,33 +44,56 @@ export class toExcel {
     if (columns.length && data) {
       xml = X_HEADER;
       xml += X_PROPS
-          .replace('%author', options.author || DEFAULT_AUTHOR)
-          .replace('%lastAuthor', options.lastAuthor || DEFAULT_AUTHOR)
-          .replace('%company', options.company || DEFAULT_COMPANY)
-          .replace('%version', options.version || DEFAULT_VERSION);
+          .replace('%author', toExcel.parseXML(options.author || DEFAULT_AUTHOR))
+          .replace('%lastAuthor', toExcel.parseXML(options.lastAuthor || DEFAULT_AUTHOR))
+          .replace('%company', toExcel.parseXML(options.company || DEFAULT_COMPANY))
+          .replace('%version', toExcel.parseXML(options.version || DEFAULT_VERSION));
       xml += X_STYLES;
       xml = xml + '<Worksheet ss:Name="' + options.filename + '"><Table>';
       xml = xml + '\n<Row>';
-      for (const column of columns) {
-        xml += X_CELL_START +
-          this.parseXML(column.label) +
-          X_CELL_END;
-      }
+      xml += toExcel.addHeaders(columns);
       xml = xml + X_ROW_START;
-      for (const item of data) {
-        xml = xml + '\n<Row>';
-        for (const column of columns) {
-          const t = column.type ? column.type : 'String';
-          const r = this.parseXML(this.getData(item, column.field));
-          xml =
-            xml +
-            '<Cell><Data ss:Type="' + t+ '">' +
-            (t === 'Number' ? +r : r) +
-            '</Data></Cell>';
-        }
-        xml = xml + X_ROW_END;
-      }
+      xml += toExcel.addRows(data, columns);
       xml += X_FOOTER;
+    }
+    return xml;
+  }
+
+  /**
+   * Returns the XML headers for the columns
+   * @param columns The headers info array
+   * @returns XML headers
+   */
+  private static addHeaders(columns: IHeader[]) {
+    let xml = '';
+    for (const column of columns) {
+      xml += X_CELL_START +
+        toExcel.parseXML(column.label) +
+        X_CELL_END;
+    }
+    return xml;
+  }
+
+  /**
+   * Returns XML rows
+   * @param data The cells data
+   * @param columns The columns data
+   * @returns XML rows
+   */
+  private static addRows(data: any[], columns: IHeader[]) {
+    let xml = '';
+    for (const item of data) {
+      xml = xml + '\n<Row>';
+      for (const column of columns) {
+        const t = column.type ? column.type : 'String';
+        const r = toExcel.parseXML(toExcel.getData(item, column.field));
+        xml =
+          xml +
+          '<Cell><Data ss:Type="' + t + '">' +
+          (t === 'Number' ? +r : r) +
+          '</Data></Cell>';
+      }
+      xml = xml + X_ROW_END;
     }
     return xml;
   }
@@ -135,7 +158,7 @@ export class toExcel {
    */
   private static parseXML(input: string) {
     let output: string;
-    if (input === undefined) return '';
+    if (input === undefined || input === null) return '';
     output = input.toString().split('&').join('&amp;');
     output = output.split('<').join('&lt;');
     output = output.split('>').join('&gt;');
