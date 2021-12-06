@@ -136,10 +136,10 @@ export class toExcel {
   private static parseXML(input: string) {
     let output: string;
     if (input === undefined) return '';
-    output = input.toString().replace(new RegExp('&', 'g'), '&amp;');
-    output = output.replace(/</g, '&lt;');
-    output = output.replace(new RegExp('>', 'g'), '&gt;');
-    output = output.replace(new RegExp('"', 'g'), '&quot;');
+    output = input.toString().split('&').join('&amp;');
+    output = output.split('<').join('&lt;');
+    output = output.split('>').join('&gt;');
+    output = output.split('"').join('&quot;');
     return output;
   }
 
