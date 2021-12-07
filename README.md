@@ -31,16 +31,16 @@ The script is published as a Release in Github. You can download and include in 
 
 CDN (Latest version):
 
->https://github.com/m0rtadelo/to-excel/releases/latest/download/toExcel.js
+>https://github.com/m0rtadelo/to-excel/releases/latest/download/to-excel.js
 
 CDN (2.2.3 version):
 
->https://github.com/m0rtadelo/to-excel/releases/download/2.2.3/toExcel.js
+>https://github.com/m0rtadelo/to-excel/releases/download/2.2.3/to-excel.js
 ## Usage
 
 ```javascript
 // include library (only one of the above methods)
-<script src="https://github.com/m0rtadelo/to-excel/releases/latest/download/toExcel.js"></script> // HTML
+<script src="https://github.com/m0rtadelo/to-excel/releases/latest/download/to-excel.js"></script> // HTML
 var toExcel = require('to-excel').toExcel;                               // CommonJS 
 import { toExcel } from 'to-excel';                                      // ES6 
 
