@@ -27,7 +27,7 @@ or
 
 **To install the script:**
 
-The script is published as a Release in Github. You can download and include in your project or use it directly from github as CDN.
+The script is published as a [Release](https://github.com/m0rtadelo/to-excel/releases) in Github. You can download and include in your project or use it directly from github as CDN.
 
 CDN (using latest version):
 
