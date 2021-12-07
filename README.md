@@ -29,13 +29,13 @@ or
 
 The script is published as a Release in Github. You can download and include in your project or use it directly from github as CDN.
 
-CDN (Latest version):
+CDN (using latest version):
 
 >https://github.com/m0rtadelo/to-excel/releases/latest/download/to-excel.js
 
-CDN (2.2.3 version):
+CDN (using 2.2.4 version):
 
->https://github.com/m0rtadelo/to-excel/releases/download/2.2.3/to-excel.js
+>https://github.com/m0rtadelo/to-excel/releases/download/2.2.4/to-excel.js
 ## Usage
 
 ```javascript
