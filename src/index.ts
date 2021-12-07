@@ -49,10 +49,10 @@ export class toExcel {
           .replace('%company', toExcel.parseXML(options.company || DEFAULT_COMPANY))
           .replace('%version', toExcel.parseXML(options.version || DEFAULT_VERSION));
       xml += X_STYLES;
-      xml = xml + '<Worksheet ss:Name="' + options.filename + '"><Table>';
-      xml = xml + '\n<Row>';
+      xml += '<Worksheet ss:Name="' + options.filename + '"><Table>';
+      xml += '\n<Row>';
       xml += toExcel.addHeaders(columns);
-      xml = xml + X_ROW_START;
+      xml += X_ROW_START;
       xml += toExcel.addRows(data, columns);
       xml += X_FOOTER;
     }
@@ -83,17 +83,16 @@ export class toExcel {
   private static addRows(data: any[], columns: IHeader[]) {
     let xml = '';
     for (const item of data) {
-      xml = xml + '\n<Row>';
+      xml += '\n<Row>';
       for (const column of columns) {
         const t = column.type ? column.type : 'String';
         const r = toExcel.parseXML(toExcel.getData(item, column.field));
-        xml =
-          xml +
+        xml +=
           '<Cell><Data ss:Type="' + t + '">' +
           (t === 'Number' ? +r : r) +
           '</Data></Cell>';
       }
-      xml = xml + X_ROW_END;
+      xml += X_ROW_END;
     }
     return xml;
   }

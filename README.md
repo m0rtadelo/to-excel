@@ -1,13 +1,13 @@
-[![Build Status](https://travis-ci.org/m0rtadelo/to-excel.svg?branch=master)](https://travis-ci.org/m0rtadelo/to-excel)
-[![Coverage Status](https://coveralls.io/repos/github/m0rtadelo/to-excel/badge.svg?branch=master)](https://coveralls.io/github/m0rtadelo/to-excel?branch=master)
+[![CI Build](https://github.com/m0rtadelo/to-excel/actions/workflows/ci.build.yaml/badge.svg)](https://github.com/m0rtadelo/to-excel/actions/workflows/ci.build.yaml)
+[![Coverage](https://sonarcloud.io/api/project_badges/measure?project=m0rtadelo_to-excel&metric=coverage)](https://sonarcloud.io/summary/new_code?id=m0rtadelo_to-excel)
 [![Known Vulnerabilities](https://snyk.io//test/github/m0rtadelo/to-excel/badge.svg?targetFile=package.json)](https://snyk.io//test/github/m0rtadelo/to-excel?targetFile=package.json)
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/2ef49526659748808e26722c7f31ca62)](https://www.codacy.com/app/m0rtadelo/to-excel?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=m0rtadelo/to-excel&amp;utm_campaign=Badge_Grade)
+[![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=m0rtadelo_to-excel&metric=security_rating)](https://sonarcloud.io/summary/new_code?id=m0rtadelo_to-excel)
 ![GitHub top language](https://img.shields.io/github/languages/top/m0rtadelo/to-excel.svg)
 [![npm version](https://badge.fury.io/js/to-excel.svg)](https://badge.fury.io/js/to-excel)
 
 # toExcel
 
-Util to generate compatible Excel xls file (xml in fact). Works with node (typescript and javascript) and browser (using a html script tag). CommonJS and ES6 module compatible. No dependencies.
+Util to generate compatible Excel/OpenOffice/... XLS file (xml in fact). Works with node (typescript and javascript) and browser (using a html script tag). CommonJS and ES6 module compatible. No dependencies.
 
 Works with your favorite frameworks and libraries (Angular, React, Electron, Webpack...) and in the browser using the script tag. 
 
@@ -15,8 +15,27 @@ Compatible with all browsers (IE9+ included).
 
 ## Install
 
+This util comes as npm package to be imported/required in your project or as standalone javascript file to be used directly in the HTML file (runs directly on the browser).
+
+**To install the module:**
+
 ```npm install --save to-excel```
 
+or
+
+```yarn install --save to-excel```
+
+**To install the script:**
+
+The script is published as a Release in Github. You can download and include in your project or use it directly from github as CDN.
+
+CDN (Latest version):
+
+>https://github.com/m0rtadelo/to-excel/releases/latest/download/toExcel.js
+
+CDN (2.2.3 version):
+
+>https://github.com/m0rtadelo/to-excel/releases/download/2.2.3/toExcel.js
 ## Usage
 
 ```javascript
@@ -48,7 +67,7 @@ var content = toExcel.exportXLS( headers, data, 'filename' );
 require('fs').writeFileSync('filename.xls', content);
 ```
 
-Demo: <https://m0rtadelo.github.io/to-excel/demo/>
+Demo available at: <https://m0rtadelo.github.io/to-excel/demo/>
 
 ## Parameters
 
