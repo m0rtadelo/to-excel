@@ -15,7 +15,7 @@ export const X_FOOTER = '\n</Table></Worksheet>\n</Workbook>';
 export const X_CELL_START = '\n<Cell ss:StyleID="hdr"><Data ss:Type="String">';
 export const X_CELL_END = '</Data></Cell>';
 export const DEFAULT_EXT = 'xls';
-export const X_ROW_START = '</Row>';
+export const X_ROW_START = '\n<Row>';
 export const X_ROW_END = '\n</Row>';
 export const DEFAULT_AUTHOR = 'Ricard Fíguls';
 export const DEFAULT_COMPANY = 'RFM Software (Ricard Figuls)';

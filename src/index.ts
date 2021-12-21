@@ -50,9 +50,9 @@ export class toExcel {
           .replace('%version', toExcel.parseXML(options.version || DEFAULT_VERSION));
       xml += X_STYLES;
       xml += '<Worksheet ss:Name="' + options.filename + '"><Table>';
-      xml += '\n<Row>';
-      xml += toExcel.addHeaders(columns);
       xml += X_ROW_START;
+      xml += toExcel.addHeaders(columns);
+      xml += X_ROW_END;
       xml += toExcel.addRows(data, columns);
       xml += X_FOOTER;
     }
