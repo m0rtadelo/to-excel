@@ -145,9 +145,7 @@ export class toExcel {
    * @returns void
    */
   public static setReplace(value?: any, replacementValue?: any) {
-    if (value && replacementValue) {
-      toExcel.replaceItems.push({ value, replacementValue });
-    }
+    toExcel.replaceItems.push({ value, replacementValue });
   }
 
   /**

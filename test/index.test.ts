@@ -27,14 +27,17 @@ const headers2 = [
 describe('toExcel', () => {
   it('should generate content as expected', () => {
     const response = toExcel.exportXLS(headers, data);
+    // fs.writeFileSync('./test/expect/1.xls', response);
     expect(response).toEqual(fs.readFileSync('./test/expect/1.xls', 'utf8'));
   });
   it('should map option to filename if is string', () => {
     const response = toExcel.exportXLS(headers, data, 'testname');
+    // fs.writeFileSync('./test/expect/2.xls', response);
     expect(response).toEqual(fs.readFileSync('./test/expect/2.xls', 'utf8'));
   });
   it('should generate valid custom type columns', () => {
     const response = toExcel.exportXLS(headers2, data2, 'testname');
+    // fs.writeFileSync('./test/expect/3.xls', response);
     expect(response).toEqual(fs.readFileSync('./test/expect/3.xls', 'utf8'));
   });
   it('should set valid metadata on file', () => {
@@ -46,13 +49,20 @@ describe('toExcel', () => {
       version: 'version',
       download: false,
     });
+    // fs.writeFileSync('./test/expect/4.xls', response);
     expect(response).toEqual(fs.readFileSync('./test/expect/4.xls', 'utf8'));
   });
   it('should replace values as expected', () => {
     toExcel.setReplace('50', '150');
     toExcel.setReplace(150, 200);
-    const response = toExcel.exportXLS(headers2, data2, 'testname');
+    let response = toExcel.exportXLS(headers2, data2, 'testname');
+    // fs.writeFileSync('./test/expect/5.xls', response);
     expect(response).toEqual(fs.readFileSync('./test/expect/5.xls', 'utf8'));
+    toExcel.setReplace(true, 'true value');
+    toExcel.setReplace(false, 'false value');
+    response = toExcel.exportXLS(headers, data, 'testname');
+    // fs.writeFileSync('./test/expect/7.xls', response);
+    expect(response).toEqual(fs.readFileSync('./test/expect/7.xls', 'utf8'));
   });
   it('should download the generated file (method A)', () => {
     (window.navigator as any).msSaveOrOpenBlob = jest.fn(() => true );
@@ -70,6 +80,7 @@ describe('toExcel', () => {
     (window.navigator as any).msSaveOrOpenBlob = undefined;
     global.URL.createObjectURL = jest.fn(() => 'details');
     const response = toExcel.exportXLS(headers2, data2, { download: true });
+    // fs.writeFileSync('./test/expect/6.xls', response);
     expect(response).toEqual(fs.readFileSync('./test/expect/6.xls', 'utf8'));
     expect(global.URL.createObjectURL).toHaveBeenCalledTimes(1);
   });
