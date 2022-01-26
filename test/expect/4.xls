@@ -17,7 +17,8 @@ xmlns:html="http://www.w3.org/TR/REC-html40">
 </Styles><Worksheet ss:Name="filename"><Table>
 <Row>
 <Cell ss:StyleID="hdr"><Data ss:Type="String">Identificator</Data></Cell>
-<Cell ss:StyleID="hdr"><Data ss:Type="String">Description</Data></Cell></Row>
+<Cell ss:StyleID="hdr"><Data ss:Type="String">Description</Data></Cell>
+</Row>
 <Row><Cell><Data ss:Type="String">1</Data></Cell><Cell><Data ss:Type="Number">50</Data></Cell>
 </Row>
 <Row><Cell><Data ss:Type="String">2</Data></Cell><Cell><Data ss:Type="Number">150</Data></Cell>

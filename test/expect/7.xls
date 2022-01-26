@@ -14,7 +14,7 @@ xmlns:html="http://www.w3.org/TR/REC-html40">
 </DocumentProperties>
 <Styles>
 <Style ss:ID="hdr"><Font ss:Color="#ffffff" ss:Bold="1" /><Interior ss:Color="#000000" ss:Pattern="Solid"/></Style>
-</Styles><Worksheet ss:Name="undefined"><Table>
+</Styles><Worksheet ss:Name="testname"><Table>
 <Row>
 <Cell ss:StyleID="hdr"><Data ss:Type="String">Identificator</Data></Cell>
 <Cell ss:StyleID="hdr"><Data ss:Type="String">Description</Data></Cell>
@@ -28,9 +28,9 @@ xmlns:html="http://www.w3.org/TR/REC-html40">
 </Row>
 <Row><Cell><Data ss:Type="String">4</Data></Cell><Cell><Data ss:Type="String">Item 4 &quot;quotes&quot;</Data></Cell><Cell><Data ss:Type="String"></Data></Cell>
 </Row>
-<Row><Cell><Data ss:Type="String">5</Data></Cell><Cell><Data ss:Type="String">true</Data></Cell><Cell><Data ss:Type="String"></Data></Cell>
+<Row><Cell><Data ss:Type="String">5</Data></Cell><Cell><Data ss:Type="String">true value</Data></Cell><Cell><Data ss:Type="String"></Data></Cell>
 </Row>
-<Row><Cell><Data ss:Type="String">6</Data></Cell><Cell><Data ss:Type="String">false</Data></Cell><Cell><Data ss:Type="String"></Data></Cell>
+<Row><Cell><Data ss:Type="String">6</Data></Cell><Cell><Data ss:Type="String">false value</Data></Cell><Cell><Data ss:Type="String"></Data></Cell>
 </Row>
 <Row><Cell><Data ss:Type="String">7</Data></Cell><Cell><Data ss:Type="String"></Data></Cell><Cell><Data ss:Type="String"></Data></Cell>
 </Row>

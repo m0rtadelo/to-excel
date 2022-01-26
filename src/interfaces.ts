@@ -23,6 +23,9 @@ export interface IOptions {
 
     /** Sets the version of the generated file */
     version?: string,
+
+    /** Sets the sheet name (filename will be used if undefined) */
+    sheetname?: string,
 }
 
 export interface IHeader {
